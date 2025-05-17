@@ -9,83 +9,42 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { LoaderCircle } from "lucide-react";
 import axios from "axios";
+import Link from "next/link";
 
 interface PlanResponse {
     text: string;
 }
 
-export default function RunMasterApp() {
-    const [form, setForm] = useState({ age: "", goal: "", level: "beginner" });
-    const [loading, setLoading] = useState(false);
-    const [plan, setPlan] = useState<PlanResponse | null>(null);
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
-    };
-
-    const generatePlan = async () => {
-        setLoading(true);
-        setPlan(null);
-        try {
-            const res = await axios.post("https://runmaster-backend.onrender.com/generate-plan", form);
-            setPlan(res.data);
-        } catch (err) {
-            console.error("Failed to fetch plan", err);
-        }
-        setLoading(false);
-    };
-
-const connectStrava = () => {
-  window.open("https://runmaster-backend.onrender.com/connect-strava", "_self");
-};
-
+export default function HomePage() {
     return (
-        <main className="min-h-screen bg-white dark:bg-black p-4 flex flex-col gap-4 items-center text-center">
-            <h1 className="text-3xl font-bold text-blue-600 dark:text-blue-400">🏃‍♂️ RunMaster</h1>
-            <p className="text-gray-600 dark:text-gray-300 max-w-xs">
-                Enter your info to get a custom AI running plan and calorie guide.
+        <div className="container px-4 py-8">
+            <h1 className="text-4xl font-bold tracking-tight">Welcome to RunMaster</h1>
+            <p className="mt-4 text-lg text-muted-foreground">
+                Your AI-powered running coach that creates personalized training plans.
             </p>
+            
+            <div className="mt-8 space-y-4">
+                <div className="rounded-lg border bg-card p-6">
+                    <h2 className="text-2xl font-semibold">Quick Start Guide</h2>
+                    <ol className="mt-4 space-y-3 text-muted-foreground">
+                        <li>1. Generate your personalized training plan</li>
+                        <li>2. Connect with Strava to sync your runs</li>
+                        <li>3. Follow your daily workouts</li>
+                        <li>4. Track your progress in the dashboard</li>
+                    </ol>
+                </div>
 
-            <div className="w-full max-w-xs flex flex-col gap-3">
-                <Input
-                    placeholder="Age"
-                    name="age"
-                    value={form.age}
-                    onChange={handleChange}
-                    type="number"
-                />
-                <Input
-                    placeholder="Goal (e.g., 5k in 4 weeks)"
-                    name="goal"
-                    value={form.goal}
-                    onChange={handleChange}
-                />
-                <select
-                    name="level"
-                    value={form.level}
-                    onChange={handleChange}
-                    className="p-2 rounded-lg border border-gray-300"
-                >
-                    <option value="beginner">Beginner</option>
-                    <option value="intermediate">Intermediate</option>
-                    <option value="advanced">Advanced</option>
-                </select>
-                <Button onClick={() => generatePlan()} disabled={loading}>
-                    {loading ? <LoaderCircle className="animate-spin" /> : "Generate Plan"}
-                </Button>
-                <Button onClick={connectStrava} variant="outline">
-                    Connect Strava
-                </Button>
+                <div className="flex gap-4">
+                    <Button asChild className="flex-1">
+                        <Link href="/generate-plan">Generate Plan</Link>
+                    </Button>
+                    <Button asChild variant="outline" className="flex-1">
+                        <Link href="https://runmaster-backend.onrender.com/connect-strava">
+                            Connect Strava
+                        </Link>
+                    </Button>
+                </div>
             </div>
-
-            {plan && (
-                <Card className="mt-4 w-full max-w-xs bg-gray-100 dark:bg-gray-800">
-                    <CardContent className="text-left text-sm whitespace-pre-wrap p-4">
-                        <strong>Training Plan:</strong>
-                        <p>{plan.text}</p>
-                    </CardContent>
-                </Card>
-            )}
-        </main>
+        </div>
     );
 }
