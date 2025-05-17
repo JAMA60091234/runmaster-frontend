@@ -8,11 +8,12 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "scripts": {
+"scripts": {
   "dev": "next dev",
-  "build": "next build && next export",
+  "build": "next build",
   "start": "next start"
 },
+
 
   "dependencies": {
     "@radix-ui/react-select": "^2.2.4",
