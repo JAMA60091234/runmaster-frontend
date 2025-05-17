@@ -35,9 +35,9 @@ export default function RunMasterApp() {
         setLoading(false);
     };
 
-    const connectStrava = () => {
-        window.location.href = "https://runmaster-backend.onrender.com/connect-strava";
-    };
+const connectStrava = () => {
+  window.open("https://runmaster-backend.onrender.com/connect-strava", "_self");
+};
 
     return (
         <main className="min-h-screen bg-white dark:bg-black p-4 flex flex-col gap-4 items-center text-center">
