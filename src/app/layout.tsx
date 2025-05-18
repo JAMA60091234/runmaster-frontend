@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
-import { BottomNav } from "@/components/layout/BottomNav";
+import { BottomNav } from "@/components/bottom-nav";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "RunMaster",
-  description: "Your AI-powered running coach",
+  title: "RunMaster - Your AI Running Coach",
+  description: "Personalized training plans powered by AI",
 };
 
 export default function RootLayout({
@@ -17,14 +16,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider>
-          <main className="min-h-screen pb-20">
-            {children}
-          </main>
-          <BottomNav />
-        </ThemeProvider>
+    <html lang="en" className="h-full">
+      <body className={`${inter.className} min-h-screen bg-gray-50`}>
+        <main className="pb-16">
+          {children}
+        </main>
+        <BottomNav />
       </body>
     </html>
   );

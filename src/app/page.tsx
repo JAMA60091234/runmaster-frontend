@@ -3,89 +3,124 @@
 // Frontend for RunMaster App (Mobile-Friendly React + Tailwind)
 // This assumes your backend is hosted at: https://runmaster-backend.onrender.com
 
-import { Button } from '@/components/ui/button'
+import { Calendar, ClipboardList, Link as LinkIcon, Settings, ChevronDown } from 'lucide-react'
 import { Card } from '@/components/ui/card'
-import Link from 'next/link'
-import { ArrowRight, Zap, Activity, Trophy } from 'lucide-react'
+import { ProgressBar } from '@/components/ui/progress-bar'
+import { ActionButton } from '@/components/action-button'
 
 export default function HomePage() {
     return (
-        <div className="relative min-h-screen">
-            {/* Background gradient */}
-            <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-background -z-10" />
-            
-            <div className="container px-4 py-12 space-y-12">
-                {/* Hero section */}
-                <div className="space-y-6 text-center">
-                    <h1 className="gradient-text">
-                        Your AI Running Coach
-                    </h1>
-                    <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                        Get personalized training plans, track your progress, and achieve your running goals with RunMaster.
-                    </p>
-                    <div className="flex gap-4 justify-center pt-4">
-                        <Button asChild size="lg" className="rounded-full">
-                            <Link href="/generate-plan">
-                                Get Started
-                                <ArrowRight className="ml-2 h-4 w-4" />
-                            </Link>
-                        </Button>
-                        <Button asChild variant="outline" size="lg" className="rounded-full">
-                            <Link href="https://runmaster-backend.onrender.com/connect-strava">
-                                Connect Strava
-                                <Activity className="ml-2 h-4 w-4" />
-                            </Link>
-                        </Button>
+        <div className="min-h-screen bg-gray-50">
+            {/* Header with profile and notifications */}
+            <div className="flex justify-between items-center p-4">
+                <div className="flex items-center gap-2">
+                    <div className="h-8 w-8 rounded-full bg-gray-200" />
+                    <div className="h-8 w-8 rounded-full bg-white border shadow-sm flex items-center justify-center">
+                        <span className="sr-only">Notifications</span>
+                        <div className="h-2 w-2 rounded-full bg-red-500" />
                     </div>
                 </div>
+                <h1 className="text-xl font-bold">Your Plan</h1>
+                <div className="w-8" /> {/* Spacer for alignment */}
+            </div>
 
-                {/* Features grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <Card className="p-6 space-y-2 bg-card/50 backdrop-blur">
-                        <Zap className="h-8 w-8 text-primary mb-2" />
-                        <h3 className="text-xl font-semibold">AI-Powered Plans</h3>
-                        <p className="text-muted-foreground">
-                            Get a customized training plan based on your goals and fitness level.
-                        </p>
-                    </Card>
-                    <Card className="p-6 space-y-2 bg-card/50 backdrop-blur">
-                        <Activity className="h-8 w-8 text-primary mb-2" />
-                        <h3 className="text-xl font-semibold">Progress Tracking</h3>
-                        <p className="text-muted-foreground">
-                            Monitor your runs, calories, and daily achievements.
-                        </p>
-                    </Card>
-                    <Card className="p-6 space-y-2 bg-card/50 backdrop-blur">
-                        <Trophy className="h-8 w-8 text-primary mb-2" />
-                        <h3 className="text-xl font-semibold">Goal Setting</h3>
-                        <p className="text-muted-foreground">
-                            Set and achieve your running goals with structured guidance.
-                        </p>
-                    </Card>
-                </div>
+            <div className="space-y-6 p-4">
+                {/* Current Plan Card */}
+                <Card className="p-6 space-y-4">
+                    <div className="flex items-start justify-between">
+                        <div>
+                            <h2 className="text-2xl font-bold">Oxford Half Marathon Plan</h2>
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
+                                <span>Your Race:</span>
+                                <span className="text-red-500 font-medium">Oxford Half Marathon</span>
+                            </div>
+                            <div className="text-sm text-muted-foreground">
+                                Your Race Date: OCT 13, 2024
+                            </div>
+                        </div>
+                        <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-black text-white font-bold">
+                            13.1
+                        </div>
+                    </div>
 
-                {/* Quick start section */}
-                <Card className="p-8 bg-card/50 backdrop-blur">
-                    <h2 className="mb-6">Quick Start Guide</h2>
                     <div className="space-y-4">
-                        <div className="flex items-center gap-4">
-                            <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">1</div>
-                            <p className="text-lg">Generate your personalized training plan</p>
+                        <div>
+                            <div className="flex justify-between text-sm mb-2">
+                                <span className="text-muted-foreground">Weeks completed</span>
+                                <span>3/11</span>
+                            </div>
+                            <ProgressBar total={11} completed={3} />
                         </div>
-                        <div className="flex items-center gap-4">
-                            <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">2</div>
-                            <p className="text-lg">Connect with Strava to sync your runs</p>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">3</div>
-                            <p className="text-lg">Follow your daily workouts</p>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">4</div>
-                            <p className="text-lg">Track your progress in the dashboard</p>
+
+                        <div>
+                            <div className="flex justify-between text-sm mb-2">
+                                <span className="text-muted-foreground">Distance</span>
+                                <span>153/584 km</span>
+                            </div>
+                            <ProgressBar total={10} completed={3} />
                         </div>
                     </div>
                 </Card>
+
+                {/* Action Buttons */}
+                <div className="grid grid-cols-4 gap-4">
+                    <ActionButton
+                        icon={Calendar}
+                        label="Current Week"
+                        variant="primary"
+                    />
+                    <ActionButton
+                        icon={ClipboardList}
+                        label="Rearrange Workouts"
+                        variant="secondary"
+                    />
+                    <ActionButton
+                        icon={LinkIcon}
+                        label="Connected Apps"
+                        variant="outline"
+                    />
+                    <ActionButton
+                        icon={Settings}
+                        label="Manage Plan"
+                        variant="outline"
+                    />
+                </div>
+
+                {/* Estimated Time Card */}
+                <Card className="bg-red-500 text-white p-6">
+                    <div className="flex items-center justify-between mb-4">
+                        <h3 className="text-lg font-medium">Estimated Half Marathon Time</h3>
+                        <ChevronDown className="h-5 w-5" />
+                    </div>
+                    <div className="text-center">
+                        <div className="text-sm opacity-75 mb-1">IN 16 WEEKS</div>
+                        <div className="text-2xl font-bold">1:30:00-1:34:00</div>
+                    </div>
+                </Card>
+
+                {/* Week Schedule */}
+                <div>
+                    <div className="flex items-center justify-between mb-4">
+                        <div>
+                            <div className="text-sm text-muted-foreground">5-11 Aug</div>
+                            <h3 className="text-lg font-bold">Week 1</h3>
+                        </div>
+                        <div className="h-6 w-6 rounded-full bg-green-500 flex items-center justify-center">
+                            <span className="text-white text-sm">✓</span>
+                        </div>
+                    </div>
+                    <div className="flex gap-2 overflow-x-auto pb-2">
+                        {Array.from({ length: 7 }).map((_, i) => (
+                            <div
+                                key={i}
+                                className="min-w-[100px] p-4 rounded-lg bg-white border shadow-sm flex flex-col items-center gap-2"
+                            >
+                                <span className="text-sm font-medium">Day {i + 1}</span>
+                                <div className="h-8 w-8 rounded-full bg-gray-100" />
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
         </div>
     );
