@@ -3,17 +3,9 @@
 // Frontend for RunMaster App (Mobile-Friendly React + Tailwind)
 // This assumes your backend is hosted at: https://runmaster-backend.onrender.com
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
-import { LoaderCircle } from "lucide-react";
-import axios from "axios";
-import Link from "next/link";
-
-interface PlanResponse {
-    text: string;
-}
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import Link from 'next/link'
 
 export default function HomePage() {
     return (

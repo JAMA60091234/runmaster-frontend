@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Home, Calendar, LineChart, Settings } from 'lucide-react'

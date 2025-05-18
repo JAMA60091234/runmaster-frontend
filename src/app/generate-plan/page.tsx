@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Card } from '@/components/ui/card'
-import { LoaderCircle } from 'lucide-react'
+import { Loader2 } from 'lucide-react'
 
 interface PlanResponse {
   text: string
@@ -84,7 +84,7 @@ export default function GeneratePlanPage() {
         >
           {loading ? (
             <>
-              <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               Generating...
             </>
           ) : (
